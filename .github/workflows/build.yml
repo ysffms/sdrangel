@@ -1,0 +1,39 @@
+name: Build SDRangel
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y \
+          build-essential cmake git \
+          qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
+          qtdeclarative5-dev qtmultimedia5-dev \
+          qttools5-dev qttools5-dev-tools \
+          libqt5websockets5-dev libfftw3-dev libusb-1.0-0-dev \
+          libboost-all-dev libasound2-dev
+
+    - name: Build
+      run: |
+        mkdir build && cd build
+        cmake ..
+        make -j$(nproc)
+
+    - name: Package AppImage
+      run: |
+        cd build
+        cpack -G DEB || true
+        cpack -G TGZ || true
