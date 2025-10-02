@@ -101,7 +101,10 @@ void PlutoSDRInput::init()
 }
 
 bool PlutoSDRInput::start()
+
 {
+    qDebug() << "[TEST] PlutoSDR plugin çalıştı!";
+
     QMutexLocker mutexLocker(&m_mutex);
 
     if (m_running) {
