@@ -20,15 +20,16 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y \
-          build-essential cmake git \
+          build-essential cmake git pkg-config \
           qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools \
           qtdeclarative5-dev qtmultimedia5-dev \
           qttools5-dev qttools5-dev-tools \
-          libqt5websockets5-dev libfftw3-dev libusb-1.0-0-dev \
-          libboost-all-dev libasound2-dev \
-          qtpositioning5-dev libqt5charts5-dev libqt5serialport5-dev \
-          qtlocation5-dev
-
+          qtpositioning5-dev qtlocation5-dev qtspeech5-dev libqt5charts5-dev libqt5serialport5-dev \
+          libqt5websockets5-dev libqt5svg5-dev \
+          libfftw3-dev libusb-1.0-0-dev libboost-all-dev libasound2-dev \
+          libopus-dev libsamplerate0-dev libsndfile1-dev \
+          libcurl4-openssl-dev libpng-dev zlib1g-dev \
+          soapysdr-module-all libsoapysdr-dev
 
     - name: Build
       run: |
